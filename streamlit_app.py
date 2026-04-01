@@ -1,65 +1,37 @@
 import streamlit as st
 
-st.set_page_config(page_title="Streamlit 구성 요소 데모", page_icon="🎉", layout="wide")
+st.set_page_config(page_title="구정숙 프로필", page_icon="✨", layout="centered")
 
-st.title("🎈 Streamlit 구성 요소 예제 페이지")
-st.write("이 페이지는 Streamlit에서 자주 사용하는 UI 요소들을 보여주는 간단한 데모입니다.")
+st.title("안녕하세요, 저는 구정숙입니다")
+st.subheader("25년차 수학교사 | 성장과 균형을 중시하는 교육자")
 
-st.header("1. 텍스트 & 마크다운")
-st.markdown("**markdown**과 `code`를 포함할 수 있습니다.")
-st.caption("st.caption: 작은 보조 텍스트")
-st.subheader("st.subheader: 소제목 테스트")
+st.markdown("---")
 
-st.header("2. 입력 위젯")
-name = st.text_input("이름", "홍길동")
-age = st.number_input("나이", min_value=0, max_value=120, value=25)
-option = st.selectbox("좋아하는 과일", ["사과", "바나나", "포도", "오렌지"])
-check = st.checkbox("알림 받기")
-radio = st.radio("성별", ["남", "여", "선택 안함"])
-st.write("입력 결과:", name, age, option, check, radio)
+st.header("기본 정보")
+st.markdown("- **이름:** 구정숙")
+st.markdown("- **직업:** 25년차 수학교사")
 
-st.header("3. 버튼과 상태")
-if st.button("클릭하시오"):
-    st.success("버튼 클릭되었습니다!")
+st.header("2026년 목표")
+st.markdown("1. **야근하지 않기**")
+st.markdown("2. **나에게 잘해주기**")
+st.markdown("3. **여유있는 어른되기**")
 
-agree = st.checkbox("약관에 동의합니다")
-if agree:
-    st.info("동의하셔서 다음 단계로 진행할 수 있습니다.")
+st.header("소개 글")
+st.write(
+    "10년 후에도, 20년 후에도, 학생들이 수학을 사랑하도록 돕는 따뜻한 교사가 되고 싶습니다."
+    " 더불어 제 시간과 마음이 여유로워지는 삶을 소중히 여기고 있습니다."
+)
 
-st.header("4. 레이아웃: 컬럼, 컨테이너")
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric("CPU", "78%", "-2%")
-with col2:
-    st.metric("메모리", "62%", "+1%")
-with col3:
-    st.metric("디스크", "54%", "+0.5%")
+st.image("https://media.giphy.com/media/l0MYsSwYLyQ6tpXfK/giphy.gif", caption="Jump!", use_column_width=True)
 
-with st.expander("추가 정보 보기"):
-    st.write("여기에 더 많은 설정/도움말을 넣을 수 있습니다.")
+st.markdown("---")
 
-st.header("5. 데이터 표시")
-import pandas as pd
+st.header("연락처")
+st.markdown("**📧 scatchi@sen.go.kr**")
 
-df = pd.DataFrame({
-    "이름": ["철수", "영희", "민수"],
-    "점수": [85, 92, 78],
-    "통과": [True, True, False],
-})
+st.markdown("---")
 
-st.dataframe(df)
-st.table(df)
+st.write("💡 이 페이지를 통해 조금 더 친근하고 편안한 분위기에서 교사 구정숙님을 알아갈 수 있기를 바랍니다.")
 
-st.header("6. 미디어")
-st.image("https://docs.streamlit.io/1.0.0/_static/streamlit-logo-secondary-colormark-darktext.svg", width=150)
-st.audio("https://www2.cs.uic.edu/~i101/SoundFiles/StarWars3.wav")
 
-st.header("7. 키보드 단축키와 코드")
-code = '''
-import streamlit as st
-st.write("Hello Streamlit")
-'''
-st.code(code, language="python")
 
-st.write("---")
-st.write("완료: 이제 이 페이지에서 다양한 Streamlit 요소를 테스트할 수 있습니다.")
