@@ -1,6 +1,51 @@
 import streamlit as st
+import base64
 
 st.set_page_config(page_title="구정숙 프로필", page_icon="✨", layout="centered")
+
+# 배경 이미지를 base64로 인코딩하여 설정
+def get_base64_image(image_path):
+    with open(image_path, 'rb') as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+try:
+    img_base64 = get_base64_image("ex-20260401/cherry_blossom.jpg")
+    st.markdown(f"""
+    <style>
+    .stApp {{
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+            url('data:image/jpeg;base64,{img_base64}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }}
+
+    .stApp > header {{
+        background-color: rgba(255, 255, 255, 0);
+    }}
+
+    .stMarkdown, .stHeader, .stSubheader, .stWrite {{
+        color: rgba(0, 0, 0, 1);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0px 0px 3px rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+    }}
+
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {{
+        color: rgba(0, 0, 0, 1);
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255, 0.9);
+        font-weight: 600;
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+except:
+    st.markdown("""
+    <style>
+    .stMarkdown, .stHeader, .stSubheader, .stWrite {
+        color: rgba(0, 0, 0, 0.85);
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 st.title("안녕하세요, 저는 구정숙입니다 ✨")
 st.subheader("🚀 도전으로 변화를 만들고  |  📈 성장을 지속하며  |  🎯 교육의 본질을 지향하는 교사")
