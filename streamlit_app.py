@@ -9,7 +9,7 @@ st.markdown("---")
 
 st.header("👤 기본 정보")
 st.markdown("- **이름:** 구정숙")
-st.markdown("- **직업:** 25년차 수학교사")
+st.markdown("- **직업:** 25년차 수학교사 / 연구특성화부장")
 
 st.header("🎯 2026년 목표")
 st.markdown("일보다 삶을 우선하고, 여유를 선택하며, 나를 아끼는 힘을 기르는 해")
