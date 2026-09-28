@@ -83,11 +83,16 @@ h1, h2, h3, h4 { color: #263a30 !important; word-break: keep-all; }
     border: 1px solid #dde5dd; border-radius: 999px;
     padding: .32rem .8rem; margin: .15rem .3rem .3rem 0; font-size: .88rem;
 }
-.quote-banner {
-    background: #eaf0e8; border-left: 5px solid #869d83;
-    border-radius: 0 18px 18px 0; padding: 1.35rem 1.5rem;
-    margin: 1.4rem 0; color: #3a5541;
-    font-size: 1.08rem; line-height: 1.8; word-break: keep-all;
+.profile-quote {
+    margin: .9rem .15rem 0;
+    padding: .85rem .9rem;
+    border-top: 1px solid #d9e2d7;
+    color: #526358;
+    font-size: .94rem;
+    font-style: italic;
+    line-height: 1.8;
+    text-align: center;
+    word-break: keep-all;
 }
 [data-testid="stMetric"] {
     background: rgba(255,255,255,.86); border: 1px solid #e5e9e1;
@@ -173,7 +178,7 @@ h1, h2, h3, h4 { color: #263a30 !important; word-break: keep-all; }
 .footer { text-align: center; color: #626e65; font-size: .86rem; padding: .8rem 0; }
 @media (max-width: 720px) {
     .block-container { padding: 1.5rem 1rem; }
-    .quote-banner { font-size: 1rem; padding: 1rem; }
+    .profile-quote { font-size: .9rem; padding: .75rem .5rem; }
     .info-card { padding: 1.1rem; }
     .school-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .topic-grid { grid-template-columns: 1fr; }
@@ -232,6 +237,9 @@ image_col, intro_col = st.columns([1, 1.85], gap="large", vertical_alignment="ce
 with image_col:
     with st.container(key="profile_image"):
         show_profile_image()
+    render_html(
+        f'<div class="profile-quote">“{escape(PROFILE["motto"])}”</div>'
+    )
 
 with intro_col:
     render_html('<div class="eyebrow">MATH × AI · GOOD TEACHER</div>')
@@ -244,7 +252,6 @@ with intro_col:
     )
     tags(["수학교육", "AI·디지털 교육", "교사 성장"])
 
-render_html(f'<div class="quote-banner">“{escape(PROFILE["motto"])}”</div>')
 metric_cols = st.columns(2)
 metric_cols[0].metric("교육 경력", PROFILE["experience"])
 metric_cols[1].metric("전문 분야", "수학 · AI 교육")
