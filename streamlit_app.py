@@ -1,89 +1,66 @@
 import streamlit as st
-import base64
 
-st.set_page_config(page_title="구정숙 프로필", page_icon="✨", layout="centered")
+st.set_page_config(page_title="구정숙 | 수학교사", page_icon="✨", layout="centered")
 
-# 배경 이미지를 base64로 인코딩하여 설정
-def get_base64_image(image_path):
-    with open(image_path, 'rb') as img_file:
-        return base64.b64encode(img_file.read()).decode()
-
-try:
-    img_base64 = get_base64_image("ex-20260401/cherry_blossom.jpg")
-    st.markdown(f"""
-    <style>
-    .stApp {{
-        background-image: 
-            linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
-            url('data:image/jpeg;base64,{img_base64}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }}
-
-    .stApp > header {{
-        background-color: rgba(255, 255, 255, 0);
-    }}
-
-    .stMarkdown, .stHeader, .stSubheader, .stWrite {{
-        color: rgba(0, 0, 0, 1);
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0px 0px 3px rgba(255, 255, 255, 0.8);
-        font-weight: 500;
-    }}
-
-    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {{
-        color: rgba(0, 0, 0, 1);
-        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255, 0.9);
-        font-weight: 600;
-    }}
-    </style>
-    """, unsafe_allow_html=True)
-except:
-    st.markdown("""
-    <style>
-    .stMarkdown, .stHeader, .stSubheader, .stWrite {
-        color: rgba(0, 0, 0, 0.85);
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-st.title("안녕하세요, 저는 구정숙입니다 ✨")
-st.subheader("🚀 도전으로 변화를 만들고  |  📈 성장을 지속하며  |  🎯 교육의 본질을 지향하는 교사")
-
-st.markdown("---")
-
-st.header("👤 기본 정보")
-st.markdown("- **이름:** 구정숙")
-st.markdown("- **직업:** 25년차 수학교사 / 연구특성화부장")
-
-st.header("🎯 2026년 목표")
-st.markdown("일보다 삶을 우선하고, 여유를 선택하며, 나를 아끼는 힘을 기르는 해")
-
-
-st.header("⭐ 핵심 관심 분야")
 st.markdown("""
--  AI·디지털 기반 교육혁신
--  학생 참여형 수업 설계
--  과정 중심 평가 & 수업-평가 일체화
--  기초학력 향상 & 학습격차 해결
--  교사 성장 & 조직 변화
--  교육 정책 ↔ 현장 연결
-""")
+<style>
+.stApp {
+    background: linear-gradient(145deg, #fffaf5 0%, #f4f7f2 55%, #f7f8fc 100%);
+}
+[data-testid="stHeader"] {
+    background: transparent;
+}
+.block-container {
+    max-width: 820px;
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+}
+h1, h2, h3 {
+    color: #202b27;
+}
+[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(32, 43, 39, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
 
-st.header("🏃‍♂️ Lifestyle")
-st.markdown("""
-🚴‍♂️ 자전거 라이딩, 🎾 테니스, 🏊‍♂️ 수영을 즐기는 활동적인 라이프스타일
-🏋️ 규칙적인 운동, 요즘 헬스 열심히 합니다. 
-🥤 건강한 식습관 
-💧 좋은 물을 충분히 마시는 생활 습관
-🌱 긍정적인 생각과 마음가짐 유지
-""")
+st.caption("MATH EDUCATOR · SEOUL")
+st.title("구정숙")
+st.subheader("도전으로 변화를 만들고, 교육의 본질을 향합니다.")
 
-st.markdown("---")
+metric_cols = st.columns(3)
+metric_cols[0].metric("교육 경력", "25년")
+metric_cols[1].metric("전문 분야", "수학교육")
+metric_cols[2].metric("현재 역할", "연구특성화부장")
 
-st.header("연락처")
-st.markdown("**📧 scatchi@sen.go.kr**")
+st.info("🎯 2026년의 방향  ·  일보다 삶을 우선하고, 여유와 자기 돌봄을 선택합니다.")
 
-st.markdown("---")
+education_tab, life_tab = st.tabs(["교육과 관심 분야", "일상과 연락처"])
 
-st.write("© 2026년 4월 1일 구정숙. All rights reserved.")
+with education_tab:
+    st.subheader("더 나은 배움의 경험을 만듭니다")
+    focus_cols = st.columns(2)
+    with focus_cols[0]:
+        st.markdown("#### 수업과 평가")
+        st.markdown("학생 참여형 수업 설계  ·  과정 중심 평가  ·  수업-평가 일체화")
+        st.markdown("#### 학습 지원")
+        st.markdown("기초학력 향상  ·  학습격차 해결")
+    with focus_cols[1]:
+        st.markdown("#### 교육의 변화")
+        st.markdown("AI·디지털 기반 교육혁신  ·  교육 정책과 현장의 연결")
+        st.markdown("#### 함께 성장하기")
+        st.markdown("교사 성장  ·  조직 변화")
+
+with life_tab:
+    st.subheader("움직이고, 꾸준히 돌봅니다")
+    st.markdown("🚴 자전거  ·  🎾 테니스  ·  🏊 수영  ·  🏋️ 헬스")
+    st.markdown("건강한 식습관과 충분한 수분 섭취, 긍정적인 마음가짐을 지향합니다.")
+    st.markdown("---")
+    st.markdown("**연락처**")
+    st.markdown("[📧 scatchi@sen.go.kr](mailto:scatchi@sen.go.kr)")
+
+st.divider()
+st.caption("© 2026 구정숙")
