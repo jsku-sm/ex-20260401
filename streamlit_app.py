@@ -252,11 +252,6 @@ with intro_col:
     )
     tags(["수학교육", "AI·디지털 교육", "교사 성장"])
 
-metric_cols = st.columns(2)
-metric_cols[0].metric("교육 경력", PROFILE["experience"])
-metric_cols[1].metric("전문 분야", "수학 · AI 교육")
-
-
 # ── 5. 탭 구성 ───────────────────────────────────────────────
 education_tab, career_tab, lecture_tab, contact_tab = st.tabs([
     "🌱 교육과 관심 분야", "🏅 경력과 주요 활동", "🎤 강의와 나눔", "📧 연락처",
