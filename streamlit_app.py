@@ -7,11 +7,10 @@ import streamlit as st
 # ── 1. 기본 정보 ─────────────────────────────────────────────
 PROFILE = {
     "name": "구정숙",
-    "experience": "25년",  # 기존 코드의 경력 연수를 유지합니다.
+    "experience": "25년",
     "slogan": "도전으로 변화를 만들고, 교육의 본질을 향합니다.",
     "motto": "연구하는 마음은 배움에 대한 겸손이요, 학생들을 향한 가장 깊은 사랑이다.",
     "email": "scatchi@sen.go.kr",
-    "gmail": "scatchi99@gmail.com",
 }
 
 ACTIVITIES = [
@@ -38,10 +37,7 @@ LECTURE_SCHOOLS = [
     "마포고등학교", "경복여고", "대일고", "여의도중학교",
 ]
 
-TRAINING = {
-    "audience": "서울시 직업계고 전체 수학교사",
-    "title": "기초학력향상 디지털수업 연수",
-}
+TRAINING_TEXT = "서울시 직업계고 수학교사 대상 기초학력향상 디지털수업연수"
 
 FOCUS_AREAS = [
     ("수업과 평가", ["학생 참여형 수업 설계", "과정 중심 평가 · 수업–평가 일체화"]),
@@ -79,9 +75,7 @@ CSS = """
 .block-container { max-width: 1120px; padding-top: 2.8rem; padding-bottom: 2rem; }
 h1, h2, h3, h4 { color: #263a30 !important; word-break: keep-all; }
 [data-testid="stMarkdownContainer"] { color: #34453c; }
-[data-testid="stCaptionContainer"] p { color: #626e65; }
 .st-key-profile_image img { border-radius: 24px; }
-.st-key-contact_qr img { border-radius: 0 !important; }
 .eyebrow { color: #755d8d; font-size: .8rem; font-weight: 700; letter-spacing: .16em; }
 .hero-description { color: #526358; line-height: 1.85; margin-top: .6rem; }
 .tag {
@@ -128,125 +122,129 @@ h1, h2, h3, h4 { color: #263a30 !important; word-break: keep-all; }
 .award-card .year { color: #805b22; font-weight: 700; font-size: .85rem; }
 .award-card h3 { margin: .3rem 0; padding: 0; font-size: 1.35rem; }
 .award-card p { color: #745d36; margin: .35rem 0 0; }
-.section-heading { display: flex; align-items: center; gap: .7rem; margin: 1.3rem 0 1rem; }
-.section-heading span {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 2rem; height: 2rem; border-radius: 10px;
-    background: #e7eee3; color: #476046; font-size: .85rem; font-weight: 700;
+
+/* 번호와 제목을 하나의 문장으로, 가로 전체 너비에 표시합니다. */
+.section-title {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    writing-mode: horizontal-tb;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    font-size: clamp(.9rem, 3.5vw, 1.18rem);
+    font-weight: 700;
+    line-height: 1.6;
+    color: #304c39;
+    background: #eaf0e8;
+    border-left: 4px solid #869d83;
+    border-radius: 0 12px 12px 0;
+    padding: .75rem 1rem;
+    margin: 1.3rem 0 1rem;
 }
-.section-heading h3 { font-size: 1.18rem; margin: 0; padding: 0; }
-.lecture-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
-.lecture-grid .info-card { margin-bottom: 0; min-width: 0; }
 .school-grid {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .6rem; list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .65rem; list-style: none; margin: 0; padding: 0;
 }
 .school-grid li {
     background: #f3f6ef; border: 1px solid #e2e9dd;
     border-radius: 10px; padding: .75rem .85rem;
     font-size: 1rem; font-weight: 600; color: #324b39; word-break: keep-all;
 }
-.training-label { color: #6b577d !important; font-size: .88rem; font-weight: 700; }
-.training-value { font-size: 1.08rem; font-weight: 600; }
-.training-divider { border: 0; border-top: 1px solid #e7e1ed; margin: 1rem 0; }
+
+/* 연수 문구는 한 줄로 표시하며 좁은 화면에서는 가로 스크롤됩니다. */
+.training-summary {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 1.1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid #e4dceb;
+    border-radius: 12px;
+    background: #f7f3fa;
+    color: #4d3f5b;
+    font-size: 1.03rem;
+    font-weight: 600;
+    line-height: 1.8;
+    white-space: nowrap;
+    overflow-x: auto;
+}
 .topic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .topic-grid .info-card { margin-bottom: 0; }
-.stDownloadButton button { background: #fff; color: #34453c; border-radius: 12px; }
 .footer { text-align: center; color: #626e65; font-size: .86rem; padding: .8rem 0; }
 @media (max-width: 720px) {
     .block-container { padding: 1.5rem 1rem; }
     .quote-banner { font-size: 1rem; padding: 1rem; }
     .info-card { padding: 1.1rem; }
-    .lecture-grid, .topic-grid { grid-template-columns: 1fr; }
+    .school-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .topic-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 380px) {
     .school-grid { grid-template-columns: 1fr; }
+    .section-title { padding: .7rem .6rem; }
 }
 </style>
 """
-st.markdown(CSS, unsafe_allow_html=True)
+st.html(CSS)
 
 
 # ── 3. 공통 함수 ─────────────────────────────────────────────
-def show_image(filename: str, width: int | str = "stretch") -> None:
-    """코드와 같은 폴더의 이미지를 표시합니다."""
-    path = BASE_DIR / filename
+def render_html(body: str) -> None:
+    """HTML을 현재 영역의 전체 너비로 표시합니다."""
+    st.html(body, width="stretch")
+
+
+def show_profile_image() -> None:
+    """코드와 같은 폴더의 프로필 이미지를 표시합니다."""
+    path = BASE_DIR / "profile.png"
     if not path.is_file():
-        st.warning(f"{filename} 파일을 streamlit_app.py와 같은 폴더에 넣어 주세요.")
+        st.warning("profile.png 파일을 streamlit_app.py와 같은 폴더에 넣어 주세요.")
         return
     try:
-        st.image(str(path), width=width, output_format="PNG")
+        st.image(str(path), width="stretch", output_format="PNG")
     except (OSError, ValueError):
-        st.warning(f"{filename} 파일을 읽지 못했습니다. 이미지 파일을 확인해 주세요.")
+        st.warning("profile.png 파일을 읽지 못했습니다. 이미지 파일을 확인해 주세요.")
 
 
 def tags(items: list[str]) -> None:
-    html = "".join(f'<span class="tag">{escape(item)}</span>' for item in items)
-    st.markdown(html, unsafe_allow_html=True)
+    body = "".join(f'<span class="tag">{escape(item)}</span>' for item in items)
+    render_html(f"<div>{body}</div>")
 
 
 def card(title: str, lines: list[str], tone: str = "green") -> None:
     tone = tone if tone in {"green", "purple", "gold"} else "green"
     body = "".join(f"<li>{escape(line)}</li>" for line in lines)
-    st.markdown(
+    render_html(
         f'<div class="info-card {tone}"><h4>{escape(title)}</h4>'
-        f'<ul class="detail-list">{body}</ul></div>',
-        unsafe_allow_html=True,
+        f'<ul class="detail-list">{body}</ul></div>'
     )
 
 
 def section_heading(number: str, title: str) -> None:
-    st.markdown(
-        f'<div class="section-heading"><span>{escape(number)}</span>'
-        f'<h3>{escape(title)}</h3></div>',
-        unsafe_allow_html=True,
+    # 번호와 제목을 서로 다른 칸으로 나누지 않습니다.
+    text = escape(f"{number} {title}")
+    render_html(
+        f'<div class="section-title" role="heading" aria-level="3">{text}</div>'
     )
-
-
-def introduction_text() -> str:
-    """화면의 최신 정보로 소개문을 만듭니다."""
-    lines = [
-        f"{PROFILE['name']} | 수학교사 · AI 교육 전문가",
-        PROFILE["slogan"], "", PROFILE["motto"], "",
-        f"교육 경력: {PROFILE['experience']}", "",
-        "[수상]", "2025 디지털교육부문 교육부장관상 수상", "",
-        "[주요 활동]", *ACTIVITIES, "",
-        "[연수 · 전문성]", *QUALIFICATIONS, "",
-        "[글로벌 연수]", "AI 디지털 해외 글로벌 연수: 프랑스·덴마크 (2026.01)", "",
-        "[학교 강의 경력]", *LECTURE_SCHOOLS, "",
-        "[수학교사 대상 연수]", f"대상: {TRAINING['audience']}",
-        f"연수명: {TRAINING['title']}", "", "[교육과 관심 분야]",
-    ]
-    for title, descriptions in FOCUS_AREAS:
-        lines.append(f"{title}: {' · '.join(descriptions)}")
-    lines.extend(["", "[함께 나누고 싶은 교육 주제]"])
-    lines.extend(f"{title}: {description}" for title, description in SHARING_TOPICS)
-    lines.extend(["", "[연락처]", PROFILE["email"], PROFILE["gmail"]])
-    return "\n".join(lines)
 
 
 # ── 4. 메인 프로필 ───────────────────────────────────────────
 image_col, intro_col = st.columns([1, 1.85], gap="large", vertical_alignment="center")
 with image_col:
     with st.container(key="profile_image"):
-        show_image("profile.png")
+        show_profile_image()
 
 with intro_col:
-    st.markdown('<div class="eyebrow">MATH × AI · GOOD TEACHER</div>', unsafe_allow_html=True)
+    render_html('<div class="eyebrow">MATH × AI · GOOD TEACHER</div>')
     st.title(PROFILE["name"])
     st.markdown("**수학교사 · AI 교육 전문가**")
     st.subheader(PROFILE["slogan"])
-    st.markdown(
+    render_html(
         '<p class="hero-description">수학을 통해 학생과 소통하고,<br>'
-        'AI·디지털 기술을 더 깊은 배움으로 연결합니다.</p>',
-        unsafe_allow_html=True,
+        'AI·디지털 기술을 더 깊은 배움으로 연결합니다.</p>'
     )
     tags(["수학교육", "AI·디지털 교육", "교사 성장"])
 
-st.markdown(
-    f'<div class="quote-banner">“{escape(PROFILE["motto"])}”</div>',
-    unsafe_allow_html=True,
-)
+render_html(f'<div class="quote-banner">“{escape(PROFILE["motto"])}”</div>')
 metric_cols = st.columns(2)
 metric_cols[0].metric("교육 경력", PROFILE["experience"])
 metric_cols[1].metric("전문 분야", "수학 · AI 교육")
@@ -276,11 +274,10 @@ with education_tab:
 
 with career_tab:
     st.subheader("배우고, 실천하고, 나누어 온 발자취")
-    st.markdown(
+    render_html(
         '<div class="award-card"><div class="year">🏆 2025 · 수상</div>'
         '<h3>디지털교육부문 교육부장관상</h3>'
-        '<p>AI·디지털 교육을 향한 연구와 실천을 이어 갑니다.</p></div>',
-        unsafe_allow_html=True,
+        '<p>AI·디지털 교육을 향한 연구와 실천을 이어 갑니다.</p></div>'
     )
     left, right = st.columns(2, gap="medium")
     with left:
@@ -291,56 +288,33 @@ with career_tab:
 
 with lecture_tab:
     st.subheader("교실의 경험을 나누고, 함께 성장합니다")
+
     section_heading("01", "강의·연수 경력")
     school_items = "".join(f"<li>{escape(school)}</li>" for school in LECTURE_SCHOOLS)
-    st.markdown(
-        '<div class="lecture-grid">'
+    render_html(
         '<div class="info-card"><h4>학교 강의 경력</h4>'
-        f'<ul class="school-grid">{school_items}</ul></div>'
-        '<div class="info-card purple"><h4>수학교사 대상 연수</h4>'
-        '<p class="training-label">연수 대상</p>'
-        f'<p class="training-value">{escape(TRAINING["audience"])}</p>'
-        '<hr class="training-divider">'
-        '<p class="training-label">연수명</p>'
-        f'<p class="training-value">{escape(TRAINING["title"])}</p>'
-        '</div></div>',
-        unsafe_allow_html=True,
+        f'<ul class="school-grid">{school_items}</ul>'
+        f'<div class="training-summary">{escape(TRAINING_TEXT)}</div>'
+        '</div>'
     )
 
-    # 접기/펼치기 없이 강의 경력과 같은 화면에 이어서 표시합니다.
     section_heading("02", "함께 나누고 싶은 교육 주제")
     topic_cards = "".join(
         f'<div class="info-card"><h4>{escape(title)}</h4>'
         f'<p>{escape(description)}</p></div>'
         for title, description in SHARING_TOPICS
     )
-    st.markdown(f'<div class="topic-grid">{topic_cards}</div>', unsafe_allow_html=True)
+    render_html(f'<div class="topic-grid">{topic_cards}</div>')
 
 with contact_tab:
-    st.subheader("연락처")
-    qr_col, email_col = st.columns([1, 1.25], gap="large", vertical_alignment="center")
-    with qr_col:
-        with st.container(key="contact_qr"):
-            show_image("contact_qr.png", width=360)
-    with email_col:
-        st.markdown("#### 이메일")
-        st.markdown("**교육청 이메일**")
-        st.markdown(f"📧 [{PROFILE['email']}](mailto:{PROFILE['email']})")
-        st.markdown("**Gmail**")
-        st.markdown(f"📧 [{PROFILE['gmail']}](mailto:{PROFILE['gmail']})")
-    st.divider()
-    st.download_button(
-        label="📄 소개문 내려받기 (.txt)",
-        data=introduction_text().encode("utf-8-sig"),
-        file_name="구정숙_프로필.txt",
-        mime="text/plain; charset=utf-8",
-        on_click="ignore",
-        width="stretch",
-    )
+    # 연락처에는 교육청 이메일만 표시합니다.
+    st.markdown("#### 교육청 이메일")
+    st.markdown(f"📧 [{PROFILE['email']}](mailto:{PROFILE['email']})")
 
+
+# ── 6. 공통 하단 문구 ────────────────────────────────────────
 st.divider()
-st.markdown(
+render_html(
     f'<div class="footer">© 2026 {escape(PROFILE["name"])}'
-    ' · 배우고, 나누고, 함께 성장합니다.</div>',
-    unsafe_allow_html=True,
+    ' · 배우고, 나누고, 함께 성장합니다.</div>'
 )
